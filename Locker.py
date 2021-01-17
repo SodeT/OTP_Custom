@@ -1,7 +1,5 @@
 import os, OTP_custom as otp
 
-# remember to use UTF-32
-
 while True:
 
     Actions = ["e", "d"]
