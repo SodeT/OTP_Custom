@@ -151,7 +151,7 @@ def decrypt(chipher_text, key):
             plain_chunk.append(plain_value)
         decrypted_chunks.append(plain_chunk)
 
-    # ------------ making it to chipher text ---------- #
+    # ------------ making it to plain text ---------- #
     plain_text = ''
     for i in range(chunks_num):
 

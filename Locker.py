@@ -1,5 +1,26 @@
 import os, OTP_custom as otp
 
+def MakeNum(text, spliter):
+
+    number = ''
+    for i in range(len(text)):
+        number += str(ord(text[i])) + spliter
+    return number
+        
+
+def MakeTxt(numString, spliter):
+
+    string = ''
+    numbers = numString.split(spliter)
+    numbers = numbers[:-1]
+    for i in range(len(numbers)):
+        string += chr(int(numbers[i]))
+
+    return string
+
+
+
+spliter = '-:-'    
 while True:
 
     Actions = ["e", "d"]
@@ -51,8 +72,8 @@ while True:
         e_file = otp.encrypt(file, key)
         
         e_fileSalt = e_file + salt
-        with open("EN_"+fileName, "w+", errors="ignore", encoding="utf-16") as f:
-            f.write(e_fileSalt)
+        with open("EN_"+fileName, "w+", errors="ignore") as f:
+            f.write(MakeNum(e_fileSalt, spliter))
             f.close()
             
      # ---------------------- decrypting --------------------
@@ -60,14 +81,14 @@ while True:
      
     elif Action == "d":
         
-        e_file = open(fileName, encoding = "utf-16").read()
+        e_file = MakeTxt(open(fileName).read(), spliter)
         file = e_file[0:-10]
         salt = e_file[-10:]
         
         key = otp.key512(key, salt)
         de_file = otp.decrypt(file, key)
         
-        with open("DE"+fileName, "w+", errors="ignore", encoding="utf-16") as f:
+        with open("DE"+fileName, "w+", errors="ignore") as f:
             f.write(de_file)
             f.close()
 
